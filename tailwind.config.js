@@ -1,32 +1,26 @@
+// 📄 hf-performance-demo/tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{ts,tsx}"
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: "#e11d48",     // rouge racing
-        accent: "#f97316",      // orange fluo
-        dark: "#0f0f0f",        // noir carbone
-        surface: "#1c1c1e",     // gris métal
-        light: "#f5f5f5"
+        background: '#F4F4F6',
+        section: '#E0E0E3',
+        textPrimary: '#1E1E1E',
+        textSecondary: '#5A5A5A',
+        accentBlue: '#0033A0',
+        accentCopper: '#B87333',
+        white: '#FFFFFF',
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"]
+        primary: ['Poppins', 'sans-serif'],
+        heading: ['Bebas Neue', 'sans-serif'],
       },
-      boxShadow: {
-        smooth: "0 4px 12px rgba(0,0,0,0.1)"
-      },
-      borderRadius: {
-        xl: "1rem",
-        '2xl': "1.5rem"
-      },
-      transitionDuration: {
-        DEFAULT: "300ms"
-      }
-    }
+    },
   },
-  plugins: []
-}
+  plugins: [],
+};

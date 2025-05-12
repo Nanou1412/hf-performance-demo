@@ -1,23 +1,23 @@
 [
   {
-    "id": "1",
-    "nom": "Reprogrammation moteur Stage 1",
-    "prix": 499,
-    "description": "Augmentez la puissance de votre moteur tout en respectant les tolérances constructeur.",
+    "id": 1,
+    "nom": "Reprogrammation moteur - Stage 1",
+    "description": "Optimisation du moteur pour un gain de puissance sécurisé et homologué.",
+    "prix": 390,
     "image": "/images/stage1.jpg"
   },
   {
-    "id": "2",
-    "nom": "Décalaminage moteur hydrogène",
-    "prix": 89,
-    "description": "Nettoyage moteur par injection d’hydrogène pour retrouver des performances optimales.",
+    "id": 2,
+    "nom": "Décalaminage hydrogène",
+    "description": "Nettoyage complet du moteur pour restaurer les performances et réduire la consommation.",
+    "prix": 99,
     "image": "/images/decalaminage.jpg"
   },
   {
-    "id": "3",
-    "nom": "Kit admission dynamique BMC",
-    "prix": 349,
-    "description": "Apport d'air optimisé pour une meilleure respiration moteur.",
-    "image": "/images/admission.jpg"
+    "id": 3,
+    "nom": "Reprogrammation boîte de vitesses",
+    "description": "Amélioration de la réactivité et de l’agrément de conduite sur BVA/DSG.",
+    "prix": 250,
+    "image": "/images/bmc_cda_ferrari_f355_mtk.jpg"
   }
 ]

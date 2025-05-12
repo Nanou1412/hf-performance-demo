@@ -1,52 +1,26 @@
-import { ReactNode } from 'react'
-import classNames from 'classnames'
+import { ButtonHTMLAttributes } from "react";
+import classNames from "classnames";
 
-interface ButtonProps {
-  children: ReactNode
-  onClick?: () => void
-  type?: 'button' | 'submit' | 'reset'
-  variant?: 'primary' | 'secondary' | 'danger'
-  full?: boolean
-  className?: string
-  disabled?: boolean
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary" | "danger";
 }
 
-const Button = ({
-  children,
-  onClick,
-  type = 'button',
-  variant = 'primary',
-  full = false,
-  className,
-  disabled = false
-}: ButtonProps) => {
-  const baseClasses =
-    'text-sm font-semibold rounded-xl transition px-5 py-2 shadow-sm'
+const Button = ({ variant = "primary", className, ...props }: ButtonProps) => {
+  const base =
+    "px-6 py-2 rounded text-sm font-semibold transition focus:outline-none";
 
   const variants = {
-    primary: 'bg-primary text-white hover:bg-red-600',
-    secondary: 'bg-white text-black hover:bg-neutral-200',
-    danger: 'bg-red-600 text-white hover:bg-red-800'
-  }
-
-  const finalClass = classNames(
-    baseClasses,
-    variants[variant],
-    full && 'w-full text-center',
-    disabled && 'opacity-50 cursor-not-allowed',
-    className
-  )
+    primary: "bg-red-600 hover:bg-red-700 text-white",
+    secondary: "bg-white hover:bg-gray-100 text-black",
+    danger: "bg-red-800 hover:bg-red-900 text-white",
+  };
 
   return (
     <button
-      type={type}
-      className={finalClass}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  )
-}
+      {...props}
+      className={classNames(base, variants[variant], className)}
+    />
+  );
+};
 
-export default Button
+export default Button;

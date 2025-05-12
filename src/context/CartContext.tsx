@@ -1,38 +1,51 @@
-import { createContext, useState, ReactNode } from 'react'
+import { createContext, useState, useEffect, ReactNode } from "react";
 
 interface Produit {
-  id: string
-  nom: string
-  prix: number
-  description: string
-  image: string
+  nom: string;
+  prix: number;
 }
 
 interface CartContextType {
-  panier: Produit[]
-  ajouterAuPanier: (produit: Produit) => void
-  retirerDuPanier: (id: string) => void
-  viderPanier: () => void
+  cart: Produit[];
+  addToCart: (produit: Produit) => void;
+  removeFromCart: (index: number) => void;
+  total: number;
 }
 
-export const CartContext = createContext<CartContextType>({} as CartContextType)
+export const CartContext = createContext<CartContextType>({
+  cart: [],
+  addToCart: () => {},
+  removeFromCart: () => {},
+  total: 0,
+});
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [panier, setPanier] = useState<Produit[]>([])
+  const [cart, setCart] = useState<Produit[]>([]);
 
-  const ajouterAuPanier = (produit: Produit) => {
-    setPanier((prev) => [...prev, produit])
-  }
+  useEffect(() => {
+    const stored = localStorage.getItem("hf-cart");
+    if (stored) setCart(JSON.parse(stored));
+  }, []);
 
-  const retirerDuPanier = (id: string) => {
-    setPanier((prev) => prev.filter((p) => p.id !== id))
-  }
+  useEffect(() => {
+    localStorage.setItem("hf-cart", JSON.stringify(cart));
+  }, [cart]);
 
-  const viderPanier = () => setPanier([])
+  const addToCart = (produit: Produit) => {
+    setCart([...cart, produit]);
+  };
+
+  const removeFromCart = (index: number) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
+  };
+
+  const total = cart.reduce((acc, curr) => acc + curr.prix, 0);
 
   return (
-    <CartContext.Provider value={{ panier, ajouterAuPanier, retirerDuPanier, viderPanier }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, total }}>
       {children}
     </CartContext.Provider>
-  )
-}
+  );
+};

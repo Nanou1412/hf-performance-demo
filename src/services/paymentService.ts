@@ -1,7 +1,11 @@
-export const simulateFakePayment = async (): Promise<{ success: boolean; message: string }> => {
+// Simule un service de paiement pour la démo
+// En version réelle : remplacer par intégration Stripe ou PayPal
+
+export const fakePayment = (amount: number) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ success: true, message: 'Paiement fictif réussi 🎉' })
-    }, 1000)
-  })
-}
+      console.log("Paiement simulé de", amount, "€");
+      resolve(true);
+    }, 1000);
+  });
+};

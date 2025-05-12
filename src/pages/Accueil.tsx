@@ -1,41 +1,70 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import Hero from "../components/ui/Hero";
 
 const Accueil = () => {
   return (
-    <section className="relative text-white min-h-[80vh] flex flex-col items-center justify-center px-6 py-20">
-      {/* Arrière-plan image avec overlay sombre */}
-      <div className="absolute inset-0 bg-black/70 z-0" />
-      <div
-        className="absolute inset-0 bg-cover bg-center z-[-1] blur-[1px] brightness-75"
-        style={{ backgroundImage: "url('/images/hero-performance.jpg')" }}
-      />
+    <div className="bg-black text-white">
+      <Hero />
 
-      {/* Contenu principal */}
-      <div className="relative z-10 text-center max-w-3xl">
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">
-          Reprogrammez votre puissance.
-        </h1>
-        <p className="text-lg text-neutral-300 mb-8">
-          HF Performance optimise votre moteur pour révéler son plein potentiel. Découvrez nos services et notre expertise dédiée à la performance automobile.
-        </p>
+      <section className="max-w-7xl mx-auto px-4 py-20">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-3xl md:text-4xl font-bold mb-6 text-center"
+        >
+          Prépare ton moteur, la performance commence ici.
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-center text-lg text-gray-400 max-w-2xl mx-auto"
+        >
+          HF Performance propose des prestations haut de gamme : reprogrammation moteur,
+          décalaminage hydrogène, entretien, stages de puissance et plus encore.
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            to="/produits"
-            className="bg-primary hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition"
-          >
-            Voir les produits
-          </Link>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mt-10 flex justify-center"
+        >
           <Link
             to="/reservation"
-            className="bg-white text-black hover:bg-neutral-200 px-6 py-3 rounded-xl font-semibold transition"
+            className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded text-white font-semibold text-sm uppercase transition"
           >
             Réserver une prestation
           </Link>
-        </div>
-      </div>
-    </section>
-  )
-}
+        </motion.div>
+      </section>
 
-export default Accueil
+      <section className="bg-neutral-900 py-16 px-4">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-red-500">+1000 véhicules</h3>
+            <p className="text-gray-400 text-sm">
+              déjà optimisés, reprogrammés ou entretenus avec passion.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-red-500">Experts certifiés</h3>
+            <p className="text-gray-400 text-sm">
+              Une équipe passionnée, équipée des meilleures technologies du marché.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-red-500">Performance & sécurité</h3>
+            <p className="text-gray-400 text-sm">
+              Chaque prestation est testée, validée et garantie.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Accueil;

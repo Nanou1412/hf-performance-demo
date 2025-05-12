@@ -1,56 +1,66 @@
-import { useState } from 'react'
-import toast from 'react-hot-toast'
+import { useState } from "react";
 
 const Contact = () => {
-  const [nom, setNom] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [form, setForm] = useState({
+    nom: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!nom || !email || !message) {
-      toast.error("Tous les champs sont obligatoires.")
-      return
-    }
-    toast.success("Message envoyé (fictif) ✅")
-    setNom('')
-    setEmail('')
-    setMessage('')
-  }
+    e.preventDefault();
+    alert("Message envoyé (simulation). Merci !");
+    setForm({ nom: "", email: "", message: "" });
+  };
 
   return (
-    <div className="max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Nous contacter</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Votre nom"
-          value={nom}
-          onChange={(e) => setNom(e.target.value)}
-          className="w-full p-3 rounded bg-neutral-800 text-white"
-        />
-        <input
-          type="email"
-          placeholder="Votre email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 rounded bg-neutral-800 text-white"
-        />
-        <textarea
-          placeholder="Votre message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className="w-full p-3 rounded bg-neutral-800 text-white h-40 resize-none"
-        />
-        <button
-          type="submit"
-          className="bg-primary text-white px-6 py-3 rounded hover:bg-red-600 transition"
-        >
-          Envoyer
-        </button>
-      </form>
-    </div>
-  )
-}
+    <div className="bg-black text-white py-16 px-4 min-h-screen">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-8">Contactez-nous</h1>
 
-export default Contact
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <input
+            type="text"
+            name="nom"
+            placeholder="Nom"
+            value={form.nom}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 bg-neutral-900 border border-neutral-700 rounded text-white"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 bg-neutral-900 border border-neutral-700 rounded text-white"
+          />
+          <textarea
+            name="message"
+            placeholder="Votre message"
+            value={form.message}
+            onChange={handleChange}
+            rows={5}
+            required
+            className="w-full px-4 py-2 bg-neutral-900 border border-neutral-700 rounded text-white"
+          ></textarea>
+
+          <button
+            type="submit"
+            className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded text-white font-semibold"
+          >
+            Envoyer
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Contact;

@@ -1,37 +1,62 @@
-import Card from '../../components/ui/Card'
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || user.role !== "admin") {
+      navigate("/admin/login");
+    }
+  }, [user, navigate]);
+
+  if (!user || user.role !== "admin") return null;
+
   return (
-    <div className="max-w-6xl mx-auto py-12 px-4">
-      <h2 className="text-3xl font-extrabold text-white mb-10 text-center">
-        Tableau de bord Admin HF Performance
-      </h2>
+    <div className="bg-black text-white py-16 px-4 min-h-screen">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold mb-4 text-red-500">
+          Admin – Bonjour {user.nom}
+        </h1>
+        <p className="text-gray-400 mb-8">
+          Espace administrateur HF Performance – accès aux données clients et
+          gestion des rendez-vous.
+        </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <Card className="text-center">
-          <h3 className="text-white text-lg font-bold mb-2">🛒 Produits actifs</h3>
-          <p className="text-primary text-3xl font-extrabold">3</p>
-          <p className="text-neutral-400 text-sm mt-2">Produits affichés dans la boutique</p>
-        </Card>
-
-        <Card className="text-center">
-          <h3 className="text-white text-lg font-bold mb-2">📦 Commandes en cours</h3>
-          <p className="text-primary text-3xl font-extrabold">2</p>
-          <p className="text-neutral-400 text-sm mt-2">À préparer / livrer</p>
-        </Card>
-
-        <Card className="text-center">
-          <h3 className="text-white text-lg font-bold mb-2">📅 Réservations</h3>
-          <p className="text-primary text-3xl font-extrabold">1</p>
-          <p className="text-neutral-400 text-sm mt-2">Rendez-vous confirmés</p>
-        </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <Link
+            to="/admin/rdv-global"
+            className="bg-neutral-900 hover:bg-neutral-800 p-6 rounded shadow text-center transition"
+          >
+            📅 Gestion des rendez-vous
+          </Link>
+          <Link
+            to="/admin/utilisateurs"
+            className="bg-neutral-900 hover:bg-neutral-800 p-6 rounded shadow text-center transition"
+          >
+            👥 Liste des clients
+          </Link>
+          <Link
+            to="/produits"
+            className="bg-neutral-900 hover:bg-neutral-800 p-6 rounded shadow text-center transition"
+          >
+            🛠️ Prestations disponibles
+          </Link>
+          <button
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+            className="bg-red-600 hover:bg-red-700 p-6 rounded shadow text-center font-semibold"
+          >
+            🚪 Déconnexion
+          </button>
+        </div>
       </div>
-
-      <Card className="text-sm text-neutral-400 text-center bg-neutral-900 border border-neutral-700">
-        ⚠️ Ceci est une version démo : les données sont fictives, destinées à illustrer la navigation.
-      </Card>
     </div>
-  )
-}
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;

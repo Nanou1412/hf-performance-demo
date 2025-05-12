@@ -1,12 +1,16 @@
 export const demoUsers = [
   {
-    type: "client",
-    email: "demo@client.fr",
-    password: "demo123"
+    id: 1,
+    role: "client",
+    email: "client@hf-performance.fr",
+    password: "client123",
+    nom: "Jean Dupont",
   },
   {
-    type: "admin",
-    email: "admin@hf.fr",
-    password: "admin123"
+    id: 2,
+    role: "admin",
+    email: "admin@hf-performance.fr",
+    password: "admin123",
+    nom: "Administrateur HF",
   }
-]
+];
